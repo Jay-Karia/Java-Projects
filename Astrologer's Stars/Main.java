@@ -10,7 +10,7 @@ public class Main {
         int num = 0;
         String num_of_rows = null;
         try {
-            num_of_rows = select.next();
+            num_of_rows = select.nextLine();
             num = Integer.parseInt(num_of_rows);
             System.out.println("Number of rows: " + num_of_rows);
         } catch (NumberFormatException ne) {
