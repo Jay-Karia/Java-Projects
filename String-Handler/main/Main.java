@@ -31,18 +31,14 @@ public class Main {
         System.out.println("Your String: " + str );
         System.out.println("String Length: " + (str.length() -1 ) + "\n");
 
+        label:
         do {
             System.out.println("Enter a shortcut or Type '.exit' to exit the program");
             Select = select.next();
-            if (Select.equals("1") || Select.equals("DC") || Select.equals("d")) {
-                delete.deleteChar(str);
-                break;
-            } else if (Select.equals("2") || Select.equals("FC") || Select.equals("f")) {
-                find.findChar(str);
-                break;
-            } else if (Select.equals("3") || Select.equals("IN") || Select.equals("n")) {
-                index.indexof(str);
-                break;
+            switch (Select) {
+                case "1", "DC", "d" -> delete.deleteChar(str);
+                case "2", "FC", "f" -> find.findChar(str);
+                case "3", "IN", "n" -> index.indexof(str);
             }
         } while (!Select.equals(".exit"));
     }
