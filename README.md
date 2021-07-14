@@ -1,2 +1,11 @@
 # Java-Projects
 - This is a repo where I will upload my all Java Projects made by Jay.
+- My one of the best Java Projects:
+- - Astrolger's Star
+- - Calculator
+- - and String Handler
+- My first Java Project:
+- - Guess Game
+- Fortunately the newer version for Guess Game is out!
+- More Java Projects will be made on your requests!
+- If you want to make Java Projects with me, contact me at jay.sanjay.karia@gmail.com
