@@ -139,27 +139,24 @@ public class password {
             writer.close();
 
             String[] fakeValues = {fN, fM, fP, fK};
-            decode(originalValues, fakeValues);
+            decode(originalValues, fakeValues[3]);
         } catch (IOException e) {
             println("An Error Occurred while storing your Password! Sorry");
         }
     }
 
-    public static void decode(String[] originalValues, String[] fakeValues) {
+    public static void decode(String[] originalValues, String fakeKey) {
         String oName, oMessage, oPass, oKey;
-        String fKey;
 
         oName = originalValues[0];
         oMessage = originalValues[1];
         oPass = originalValues[2];
         oKey = originalValues[3];
 
-        fKey = fakeValues[3];
-
         String directory = originalValues[4];
 
         // Writing Original values
-        File file = new File(directory + fKey + ".txt");
+        File file = new File(directory + fakeKey + ".txt");
         try {
             Writer writer = new FileWriter(file);
             writer.write("Name: " + oName + "\nMessage: " + oMessage + "\nPassword: " + oPass + "\nSecurity Key: " + oKey);
