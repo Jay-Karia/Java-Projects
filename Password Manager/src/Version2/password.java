@@ -28,6 +28,8 @@ public class password {
         switch (sel) {
             case "1" -> {
                 println("\nSelected: 1) Enter a new Password");
+                println("\nEnter your True Information");
+
                 println("\nEnter your name");
                 Scanner name = new Scanner(System.in);
                 String n = name.nextLine();
@@ -100,20 +102,37 @@ public class password {
 
     public static void encode(String security, String password, String directory) throws IOException {
         // Encode the security key
-        println("Enter your False information\n");
-        println("What you want as your security key");
-        Scanner newSec = new Scanner(System.in);
-        String newKey = newSec.nextLine();
+        println("\nEnter your False information");
+
+        println("Enter your false name");
+        Scanner fName = new Scanner(System.in);
+        String fN = fName.nextLine();
+
+        println("\nEnter your false message");
+        Scanner fMessage = new Scanner(System.in);
+        String fM = fMessage.nextLine();
+
+        println("\nEnter your false password");
+        Scanner fPass = new Scanner(System.in);
+        String fP = fPass.nextLine();
+
+        println("\nEnter your false security key");
+        Scanner fKey = new Scanner(System.in);
+        String fK = fKey.nextLine();
 
         // Make a File Object
-        File file = new File(directory + newKey + ".txt");
+        File file = new File(directory + fK + ".txt");
 
 
         // Write into a File
         Writer writer = null;
         try {
             writer = new FileWriter(file);
-            writer.write("A Test");
+            writer.write("Name: " + fN + 
+                         "\nMessage" + fM + 
+                         "\nPassword: " + fP + 
+                         "\nSecurity Key" + fK
+            );
             
         } catch (IOException e) {
             println("An Error Occurred while storing your Password! Sorry");
