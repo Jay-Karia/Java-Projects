@@ -127,7 +127,7 @@ public class password {
 
 
         // Write into a File
-        Writer writer = null;
+        Writer writer;
         try {
             writer = new FileWriter(file);
             writer.write("Name: " + fN + 
@@ -135,13 +135,13 @@ public class password {
                          "\nPassword: " + fP + 
                          "\nSecurity Key: " + fK
             );
+            writer.flush();
+            writer.close();
+            
             String[] fakeValues = {fN, fM, fP, fK};
             decode(originalValues, fakeValues);
         } catch (IOException e) {
             println("An Error Occurred while storing your Password! Sorry");
-        } finally {
-            writer.flush();
-            writer.close();
         }
     }
 
@@ -161,13 +161,13 @@ public class password {
 
         String directory = originalValues[4];
 
-        // Writing Fake values
+        // Writing Original values
         File file = new File(directory + fKey + ".txt");
         try {
             Writer writer = new FileWriter(file);
             writer.write("Name: " + oName + "\nMessage: " + oMessage + "\nPassword: " + oPass + "\nSecurity Key: " + oKey);
         } catch (IOException e) {
-            e.printStackTrace();
+            println("An Unexpected Error Occurred! Sorry");
         }
     }
 }
