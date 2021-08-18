@@ -137,7 +137,7 @@ public class password {
             );
             writer.flush();
             writer.close();
-            
+
             String[] fakeValues = {fN, fM, fP, fK};
             decode(originalValues, fakeValues);
         } catch (IOException e) {
@@ -147,16 +147,13 @@ public class password {
 
     public static void decode(String[] originalValues, String[] fakeValues) {
         String oName, oMessage, oPass, oKey;
-        String fName, fMessage, fPass, fKey;
+        String fKey;
 
         oName = originalValues[0];
         oMessage = originalValues[1];
         oPass = originalValues[2];
         oKey = originalValues[3];
 
-        fName = fakeValues[0];
-        fMessage= fakeValues[1];
-        fPass = fakeValues[2];
         fKey = fakeValues[3];
 
         String directory = originalValues[4];
@@ -166,6 +163,8 @@ public class password {
         try {
             Writer writer = new FileWriter(file);
             writer.write("Name: " + oName + "\nMessage: " + oMessage + "\nPassword: " + oPass + "\nSecurity Key: " + oKey);
+            writer.flush();
+            writer.close();
         } catch (IOException e) {
             println("An Unexpected Error Occurred! Sorry");
         }
