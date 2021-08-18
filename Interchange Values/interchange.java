@@ -16,15 +16,15 @@ public class interchange {
         int n2 = num2.nextInt();
         System.out.println("Number 2: " + n2);
 
-        int d = n1-n2; // let the diff be -10
+        int d = n1-n2;
         if (n1 > n2) {
-            n1 = n2; // n1 was 10 and n2 is 20, now n1=20
-        int diff = Math.abs(d); // now it is 10
-            n2 = n1 + diff; // 20-diff(10)
+            n1 = n2;
+        int diff = Math.abs(d);
+            n2 = n1 + diff; 
         } else {
-            n1 = n2; // n1 was 10 and n2 is 20, now n1=20
-        int diff = Math.abs(d); // now it is 10
-            n2 = n1 - diff; // let n1=10, then, n2=10+diff(10)
+            n1 = n2;
+        int diff = Math.abs(d); 
+            n2 = n1 - diff; 
         }
 
         System.out.println("\nNumber 1: " + n1);
