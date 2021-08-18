@@ -131,9 +131,9 @@ public class password {
         try {
             writer = new FileWriter(file);
             writer.write("Name: " + fN + 
-                         "\nMessage" + fM + 
+                         "\nMessage: " + fM + 
                          "\nPassword: " + fP + 
-                         "\nSecurity Key" + fK
+                         "\nSecurity Key: " + fK
             );
             String[] fakeValues = {fN, fM, fP, fK};
             decode(originalValues, fakeValues);
@@ -146,6 +146,6 @@ public class password {
     }
 
     public static void decode(String[] originalValues, String[] fakeValues) {
-
+        
     }
 }
