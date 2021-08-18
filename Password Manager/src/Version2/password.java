@@ -54,8 +54,10 @@ public class password {
                         println("Enter the Security Key for your Password");
                         Scanner security = new Scanner(System.in);
                         String key = security.nextLine();
+
+                        String[] originalValues = {n, message, password, key};
                         /*Setting a Password*/
-                        encode(key, newPassword, cDir);
+                        encode(originalValues);
                     } else {
                         println("Your password doesn't match! Try again");
                         valid = false;
@@ -100,7 +102,7 @@ public class password {
         System.out.println(str);
     }
 
-    public static void encode(String security, String password, String directory) throws IOException {
+    public static void encode(String[] originalValues) throws IOException {
         // Encode the security key
         println("\nEnter your False information");
 
@@ -121,7 +123,7 @@ public class password {
         String fK = fKey.nextLine();
 
         // Make a File Object
-        File file = new File(directory + fK + ".txt");
+        File file = new File(originalValues[3] + fK + ".txt");
 
 
         // Write into a File
@@ -133,12 +135,17 @@ public class password {
                          "\nPassword: " + fP + 
                          "\nSecurity Key" + fK
             );
-            
+            String[] fakeValues = {fN, fM, fP, fK};
+            decode(originalValues, fakeValues);
         } catch (IOException e) {
             println("An Error Occurred while storing your Password! Sorry");
         } finally {
             writer.flush();
             writer.close();
         }
+    }
+
+    public static void decode(String[] originalValues, String[] fakeValues) {
+
     }
 }
