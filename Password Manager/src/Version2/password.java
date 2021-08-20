@@ -57,7 +57,29 @@ public class password {
 
                         String[] originalValues = {n, message, password, key, cDir};
                         /*Setting a Password*/
-                        encode(originalValues);
+                        println("\nEnter your False information");
+
+                        println("Enter your false name");
+                        Scanner fName = new Scanner(System.in);
+                        String fN = fName.nextLine();
+
+                        println("\nEnter your false message");
+                        Scanner fMessage = new Scanner(System.in);
+                        String fM = fMessage.nextLine();
+
+                        println("\nEnter your false password");
+                        Scanner fPass = new Scanner(System.in);
+                        String fP = fPass.nextLine();
+
+                        println("\nEnter your false security key");
+                        Scanner fKey = new Scanner(System.in);
+                        String fK = fKey.nextLine();
+
+                        // Make a File Object
+                        File file = new File(originalValues[4] + fK + ".txt");
+
+                        String[] fakeValues = {fN, fM, fP, fK};
+                        encode(fakeValues, cDir);
                     } else {
                         println("Your password doesn't match! Try again");
                         valid = false;
@@ -102,56 +124,23 @@ public class password {
         System.out.println(str);
     }
 
-    public static void encode(String[] originalValues) throws IOException {
-        // Encode the security key
-        println("\nEnter your False information");
-
-        println("Enter your false name");
-        Scanner fName = new Scanner(System.in);
-        String fN = fName.nextLine();
-
-        println("\nEnter your false message");
-        Scanner fMessage = new Scanner(System.in);
-        String fM = fMessage.nextLine();
-
-        println("\nEnter your false password");
-        Scanner fPass = new Scanner(System.in);
-        String fP = fPass.nextLine();
-
-        println("\nEnter your false security key");
-        Scanner fKey = new Scanner(System.in);
-        String fK = fKey.nextLine();
-
-        // Make a File Object
-        File file = new File(originalValues[4] + fK + ".txt");
-
-
-        // Write into a File
+    public static void encode(String[] fakeValues, String Directory) throws IOException {
+        File file = new File(Directory + fakeValues[3] + ".txt");
         Writer writer;
         try {
             writer = new FileWriter(file);
-            writer.write("Name: " + fN + 
-                         "\nMessage: " + fM + 
-                         "\nPassword: " + fP + 
-                         "\nSecurity Key: " + fK
-            );
+            writer.write("Name: " + fakeValues[0] + 
+                         "\nMessage: " + fakeValues[1] + 
+                         "\nPassword: " + fakeValues[2] +
+                         "\nSecurity Key: " + fakeValues[3]);
             writer.flush();
             writer.close();
-
-            String[] fakeValues = {fN, fM, fP, fK};
-            decode(originalValues, fakeValues[3]);
         } catch (IOException e) {
             println("An Error Occurred while storing your Password! Sorry");
         }
     }
 
     public static void decode(String[] originalValues, String fakeKey) {
-        String oName, oMessage, oPass, oKey;
-
-        oName = originalValues[0];
-        oMessage = originalValues[1];
-        oPass = originalValues[2];
-        oKey = originalValues[3];
 
         String directory = originalValues[4];
 
@@ -159,7 +148,7 @@ public class password {
         File file = new File(directory + fakeKey + ".txt");
         try {
             Writer writer = new FileWriter(file);
-            writer.write("Name: " + oName + "\nMessage: " + oMessage + "\nPassword: " + oPass + "\nSecurity Key: " + oKey);
+            writer.write("Name: " + originalValues[0] + "\nMessage: " + originalValues[1] + "\nPassword: " + originalValues[2] + "\nSecurity Key: " + originalValues[3]);
             writer.flush();
             writer.close();
         } catch (IOException e) {
