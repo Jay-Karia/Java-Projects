@@ -54,8 +54,6 @@ public class password {
                         println("Enter the Security Key for your Password");
                         Scanner security = new Scanner(System.in);
                         String key = security.nextLine();
-
-                        String[] originalValues = {n, message, password, key, cDir};
                         /*Setting a Password*/
                         println("\nEnter your False information");
 
@@ -75,6 +73,7 @@ public class password {
                         Scanner fKey = new Scanner(System.in);
                         String fK = fKey.nextLine();
 
+                        String[] originalValues = {n, message, password, key, cDir};
                         // Make a File Object
                         File file = new File(originalValues[4] + fK + ".txt");
 
