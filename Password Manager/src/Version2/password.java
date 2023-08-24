@@ -1,7 +1,7 @@
 import java.util.Objects;
 import java.util.Scanner;
 import java.io.*;
-// Not working
+
 public class password {
     public static void main(String[] args) throws IOException {
         System.out.println("\nWelcome to Password Manager Developed -- By Jay (v-2.0)");
@@ -54,31 +54,10 @@ public class password {
                         println("Enter the Security Key for your Password");
                         Scanner security = new Scanner(System.in);
                         String key = security.nextLine();
-                        /*Setting a Password*/
-                        println("\nEnter your False information");
-
-                        println("Enter your false name");
-                        Scanner fName = new Scanner(System.in);
-                        String fN = fName.nextLine();
-
-                        println("\nEnter your false message");
-                        Scanner fMessage = new Scanner(System.in);
-                        String fM = fMessage.nextLine();
-
-                        println("\nEnter your false password");
-                        Scanner fPass = new Scanner(System.in);
-                        String fP = fPass.nextLine();
-
-                        println("\nEnter your false security key");
-                        Scanner fKey = new Scanner(System.in);
-                        String fK = fKey.nextLine();
 
                         String[] originalValues = {n, message, password, key, cDir};
-                        // Make a File Object
-                        File file = new File(originalValues[4] + fK + ".txt");
-
-                        String[] fakeValues = {fN, fM, fP, fK};
-                        encode(fakeValues, cDir);
+                        /*Setting a Password*/
+                        encode(originalValues);
                     } else {
                         println("Your password doesn't match! Try again");
                         valid = false;
@@ -123,35 +102,72 @@ public class password {
         System.out.println(str);
     }
 
-    public static void encode(String[] fakeValues, String Directory) throws IOException {
-        File file = new File(Directory + fakeValues[3] + ".txt");
-        Writer writer;
+    public static void encode(String[] originalValues) throws IOException {
+        // Encode the security key
+        println("\nEnter your False information");
+
+        println("Enter your false name");
+        Scanner fName = new Scanner(System.in);
+        String fN = fName.nextLine();
+
+        println("\nEnter your false message");
+        Scanner fMessage = new Scanner(System.in);
+        String fM = fMessage.nextLine();
+
+        println("\nEnter your false password");
+        Scanner fPass = new Scanner(System.in);
+        String fP = fPass.nextLine();
+
+        println("\nEnter your false security key");
+        Scanner fKey = new Scanner(System.in);
+        String fK = fKey.nextLine();
+
+        // Make a File Object
+        File file = new File(originalValues[4] + fK + ".txt");
+
+
+        // Write into a File
+        Writer writer = null;
         try {
             writer = new FileWriter(file);
-            writer.write("Name: " + fakeValues[0] + 
-                         "\nMessage: " + fakeValues[1] + 
-                         "\nPassword: " + fakeValues[2] +
-                         "\nSecurity Key: " + fakeValues[3]);
-            writer.flush();
-            writer.close();
+            writer.write("Name: " + fN + 
+                         "\nMessage: " + fM + 
+                         "\nPassword: " + fP + 
+                         "\nSecurity Key: " + fK
+            );
+            String[] fakeValues = {fN, fM, fP, fK};
+            decode(originalValues, fakeValues);
         } catch (IOException e) {
             println("An Error Occurred while storing your Password! Sorry");
+        } finally {
+            writer.flush();
+            writer.close();
         }
     }
 
-    public static void decode(String[] originalValues, String fakeKey) {
+    public static void decode(String[] originalValues, String[] fakeValues) {
+        String oName, oMessage, oPass, oKey;
+        String fName, fMessage, fPass, fKey;
+
+        oName = originalValues[0];
+        oMessage = originalValues[1];
+        oPass = originalValues[2];
+        oKey = originalValues[3];
+
+        fName = fakeValues[0];
+        fMessage= fakeValues[1];
+        fPass = fakeValues[2];
+        fKey = fakeValues[3];
 
         String directory = originalValues[4];
 
-        // Writing Original values
-        File file = new File(directory + fakeKey + ".txt");
+        // Writing Fake values
+        File file = new File(directory + fKey + ".txt");
         try {
             Writer writer = new FileWriter(file);
-            writer.write("Name: " + originalValues[0] + "\nMessage: " + originalValues[1] + "\nPassword: " + originalValues[2] + "\nSecurity Key: " + originalValues[3]);
-            writer.flush();
-            writer.close();
+            writer.write("Name: " + oName + "\nMessage: " + oMessage + "\nPassword: " + oPass + "\nSecurity Key: " + oKey);
         } catch (IOException e) {
-            println("An Unexpected Error Occurred! Sorry");
+            e.printStackTrace();
         }
     }
 }
